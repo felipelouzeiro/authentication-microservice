@@ -17,10 +17,11 @@ usersRoutes.get(
 
 usersRoutes.get(
   '/users/:id',
-  (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+  async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id = req.params.id;
+    const user = await usersRepository.findById(id);
 
-    res.status(StatusCodes.OK).send(id);
+    res.status(StatusCodes.OK).send(user);
   }
 );
 
