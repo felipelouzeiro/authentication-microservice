@@ -2,15 +2,15 @@ import { Router } from 'express';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-export const routes = Router();
+export const usersRoutes = Router();
 
 const users = [{ username: 'foo' }, { username: 'bar' }];
 
-routes.get('/users', (req: Request, res: Response, next: NextFunction) => {
+usersRoutes.get('/users', (req: Request, res: Response, next: NextFunction) => {
   res.status(StatusCodes.OK).send(users);
 });
 
-routes.get(
+usersRoutes.get(
   '/users/:id',
   (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id = req.params.id;
@@ -19,13 +19,16 @@ routes.get(
   }
 );
 
-routes.post('/users', (req: Request, res: Response, next: NextFunction) => {
-  const newUser = req.body;
+usersRoutes.post(
+  '/users',
+  (req: Request, res: Response, next: NextFunction) => {
+    const newUser = req.body;
 
-  res.status(StatusCodes.CREATED).send(newUser);
-});
+    res.status(StatusCodes.CREATED).send(newUser);
+  }
+);
 
-routes.put(
+usersRoutes.put(
   '/users/:id',
   (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id = req.params.id;
@@ -36,7 +39,7 @@ routes.put(
   }
 );
 
-routes.delete(
+usersRoutes.delete(
   '/users/:id',
   (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id = req.params.id;
