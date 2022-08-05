@@ -1,14 +1,19 @@
 import { Router } from 'express';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import usersRepository from '../repositories/usersRepository';
 
 export const usersRoutes = Router();
 
 const users = [{ username: 'foo' }, { username: 'bar' }];
 
-usersRoutes.get('/users', (req: Request, res: Response, next: NextFunction) => {
-  res.status(StatusCodes.OK).send(users);
-});
+usersRoutes.get(
+  '/users',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const users = await usersRepository.findAllUsers();
+    res.status(StatusCodes.OK).send(users);
+  }
+);
 
 usersRoutes.get(
   '/users/:id',
