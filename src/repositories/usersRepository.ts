@@ -1,6 +1,7 @@
 import { db } from '../database/db';
 import { DATABASE_ENCRYPTION_KEY } from '../environments';
 import DatabaseError from '../models/errors/database.error.model';
+import ForbiddenError from '../models/errors/forbidden.error.model';
 import { User } from '../models/useModel';
 
 class UserRepository {
@@ -52,6 +53,25 @@ class UserRepository {
 
     const values = [uuid];
     await db.query(query, values);
+  }
+
+  async findByUsernameAndPassword(
+    username: string,
+    password: string
+  ): Promise<User | null> {
+    try {
+      const query = `SELECT uuid, username FROM application_user WHERE username = $1 AND password = crypt($2, $3);`;
+
+      const values = [username, password, DATABASE_ENCRYPTION_KEY];
+      const { rows } = await db.query<User>(query, values);
+      const [user] = rows;
+      return user || null;
+    } catch (error) {
+      throw new DatabaseError(
+        'Erro na consulta por username e password',
+        error
+      );
+    }
   }
 }
 

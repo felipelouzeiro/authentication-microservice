@@ -5,8 +5,6 @@ import usersRepository from '../repositories/usersRepository';
 
 export const usersRoutes = Router();
 
-const users = [{ username: 'foo' }, { username: 'bar' }];
-
 usersRoutes.get(
   '/users',
   async (req: Request, res: Response, next: NextFunction) => {
