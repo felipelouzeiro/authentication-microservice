@@ -27,10 +27,12 @@ usersRoutes.get(
 
 usersRoutes.post(
   '/users',
-  (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const newUser = req.body;
 
-    res.status(StatusCodes.CREATED).send(newUser);
+    const id = await usersRepository.create(newUser);
+
+    res.status(StatusCodes.CREATED).send(id);
   }
 );
 
