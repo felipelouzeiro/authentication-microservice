@@ -4,6 +4,7 @@ import usersRepository from '../repositories/usersRepository';
 import JWT from 'jsonwebtoken';
 import { StatusCodes } from 'http-status-codes';
 import basicAuthorizationMiddleware from '../middlewares/basic-authentication.middleware';
+import { environment } from '../environments';
 
 export const authorizationRoute = Router();
 
@@ -21,7 +22,7 @@ authorizationRoute.post(
       const jwtPayload = { username: user.username };
       const jwtOptions = { subject: user?.uuid };
 
-      const jwt = JWT.sign(jwtPayload, 'my_secret_key', jwtOptions);
+      const jwt = JWT.sign(jwtPayload, environment.JWT_KEY, jwtOptions);
 
       res.status(StatusCodes.OK).json({ token: jwt });
     } catch (error) {

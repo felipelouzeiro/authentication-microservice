@@ -1,9 +1,9 @@
 import { db } from '../database/db';
-import { DATABASE_ENCRYPTION_KEY } from '../environments';
+import { environment } from '../environments';
 import DatabaseError from '../models/errors/database.error.model';
-import ForbiddenError from '../models/errors/forbidden.error.model';
 import { User } from '../models/useModel';
 
+const { DATABASE_ENCRYPTION_KEY } = environment;
 class UserRepository {
   async findAllUsers(): Promise<User[]> {
     const query = `SELECT uuid, username FROM application_user;`;

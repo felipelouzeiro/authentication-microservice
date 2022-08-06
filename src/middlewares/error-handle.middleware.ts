@@ -9,12 +9,13 @@ function errorHandler(
   res: Response,
   next: NextFunction
 ) {
+  console.log(error);
   if (error instanceof DatabaseError) {
-    res.status(StatusCodes.BAD_REQUEST);
+    return res.status(StatusCodes.BAD_REQUEST).send(error.message);
   } else if (error instanceof ForbiddenError) {
-    res.status(StatusCodes.FORBIDDEN);
+    return res.status(StatusCodes.FORBIDDEN).send(error.message);
   } else {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR);
+    return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 
