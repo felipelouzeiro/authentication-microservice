@@ -2,6 +2,8 @@
 
 Este projeto é um **microsserviço de autenticação** de usuário.👥
 
+Objetivo: Treinar Typescript em NodeJS e PostgreSQL.
+
 ### Arquitetura
 
 #### 📂Environments
@@ -43,9 +45,13 @@ Este projeto é um **microsserviço de autenticação** de usuário.👥
 
 ---
 
-3 - Crie um arquivo **.env** na raiz do projeto e o preencha com as variáveis de ambiente assim como no arquivo de exemplo **.env.example**.
+3 - Crie uma tabela utilizando o template sql que está na pasta raiz. Nesse projeto foi utilizado o serviço [elephantsql]('https://customer.elephantsql.com/) por ter um processo de configuração simples e rápido.
 
-4 - Execute o script de build e start:
+---
+
+4 - Crie um arquivo **.env** na raiz do projeto e o preencha com as variáveis de ambiente assim como no arquivo de exemplo **.env.example**.
+
+5 - Execute o script de build e start:
 
 ---
 
