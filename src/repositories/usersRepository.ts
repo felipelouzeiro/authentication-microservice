@@ -28,6 +28,26 @@ class UserRepository {
 
     return rows[0].uuid;
   }
+
+  async update(user: User): Promise<void> {
+    const query = `UPDATE application_user SET username = $1, password = crypt($2, $3) WHERE uuid = $4;`;
+
+    const values = [
+      user.username,
+      user.password,
+      DATABASE_ENCRYPTION_KEY,
+      user.uuid,
+    ];
+
+    await db.query(query, values);
+  }
+
+  async removeById(uuid: string): Promise<void> {
+    const query = `DELETE FROM application_user WHERE uuid = $1;`;
+
+    const values = [uuid];
+    await db.query(query, values);
+  }
 }
 
 export default new UserRepository();

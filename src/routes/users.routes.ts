@@ -38,19 +38,24 @@ usersRoutes.post(
 
 usersRoutes.put(
   '/users/:id',
-  (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+  async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id = req.params.id;
     const modifiedUser = req.body;
+
     modifiedUser.id = id;
 
-    res.status(StatusCodes.OK).send(modifiedUser);
+    await usersRepository.update(modifiedUser);
+
+    res.status(StatusCodes.OK).send();
   }
 );
 
 usersRoutes.delete(
   '/users/:id',
-  (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+  async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     const id = req.params.id;
+
+    await usersRepository.removeById(id);
 
     res.sendStatus(StatusCodes.OK);
   }
