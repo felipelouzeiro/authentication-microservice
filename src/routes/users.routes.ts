@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import jwtAuthenticationMiddleware from '../middlewares/jwt-authentication.middleware';
 import usersRepository from '../repositories/usersRepository';
 
 export const usersRoutes = Router();
 
 usersRoutes.get(
   '/users',
+  jwtAuthenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const users = await usersRepository.findAllUsers();
@@ -19,6 +21,7 @@ usersRoutes.get(
 
 usersRoutes.get(
   '/users/:id',
+  jwtAuthenticationMiddleware,
   async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     try {
       const id = req.params.id;
@@ -32,6 +35,7 @@ usersRoutes.get(
 
 usersRoutes.post(
   '/users',
+  jwtAuthenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const newUser = req.body;
@@ -47,6 +51,7 @@ usersRoutes.post(
 
 usersRoutes.put(
   '/users/:id',
+  jwtAuthenticationMiddleware,
   async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     try {
       const id = req.params.id;
@@ -65,6 +70,7 @@ usersRoutes.put(
 
 usersRoutes.delete(
   '/users/:id',
+  jwtAuthenticationMiddleware,
   async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     try {
       const id = req.params.id;
