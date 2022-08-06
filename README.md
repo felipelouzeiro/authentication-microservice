@@ -45,7 +45,7 @@ Objetivo: Treinar Typescript em NodeJS e PostgreSQL.
 
 ---
 
-3 - Crie uma tabela utilizando o template sql que está na pasta raiz. Nesse projeto foi utilizado o serviço [elephantsql]('https://customer.elephantsql.com/) por ter um processo de configuração simples e rápido.
+3 - Crie uma tabela utilizando o template sql que está na pasta raiz. Nesse projeto foi utilizado o serviço [elephantsql](https://customer.elephantsql.com/) por ter um processo de configuração simples e rápido.
 
 ---
 
@@ -142,4 +142,4 @@ obs: Necessário envio de token no campo de autenticação do tipo **bearer**.
 
 ---
 
-Feito com :heart: por [felipelouzeiro]('https://github.com/felipelouzeiro');
+Feito com :heart: por [felipelouzeiro](https://github.com/felipelouzeiro);
